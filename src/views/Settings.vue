@@ -31,7 +31,7 @@
             </v-list-item-content>
           </v-list-item>
           <v-divider></v-divider>
-          <v-list-item-group v-show="currentTabIndex===0">
+          <v-list-item-group v-show="currentTabIndex===0" class="px-4">
             <v-list-item>
               <v-list-item-title>Name</v-list-item-title>
               <v-list-item-subtitle class="text-right">
@@ -71,7 +71,6 @@
                   <template v-slot:activator="{ on }">
                     <v-text-field
                       value="01/01/2000"
-                      readonly
                       v-on="on"
                     ></v-text-field>
                   </template>
@@ -84,7 +83,7 @@
               </v-list-item-subtitle>
             </v-list-item>
           </v-list-item-group>
-          <v-list-item-group v-show="currentTabIndex===1">
+          <v-list-item-group v-show="currentTabIndex===1"  class="px-4">
             <v-list-item>
               <v-list-item-title>Dark mode</v-list-item-title>
               <v-list-item-subtitle class="text-right">
@@ -95,7 +94,7 @@
               </v-list-item-subtitle>
             </v-list-item>
           </v-list-item-group>
-          <v-list-item-group v-show="currentTabIndex===2">
+          <v-list-item-group v-show="currentTabIndex===2"  class="px-4">
             <v-list-item>
               <v-list-item-title>Language</v-list-item-title>
               <v-list-item-subtitle class="text-right">
