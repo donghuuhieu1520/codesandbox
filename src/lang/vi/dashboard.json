@@ -1,0 +1,34 @@
+{
+  "newfeeds": "Bảng Tin",
+  "populars": "Phổ Biến",
+  "archived": "Lưu Trữ",
+  "settings": "Thiết Lập",
+  "new": "Tạo",
+  "myProfile": "Tài khoản của tôi",
+  "signOut": "Đăng xuất",
+  "account": "Tài Khoản",
+  "accountDescription": "Thay đổi thông tin cá nhân",
+  "name": "Tên",
+  "email": "Email",
+  "gender": "Giới tính",
+  "birthday": "Ngày sinh",
+  "apply": "Lưu",
+  "appearance": "Giao Diện",
+  "appearanceDescription": "Thiết lập giao diện cho CodePaper",
+  "darkMode": "Chế độ tối",
+  "on": "Bật",
+  "off": "Tắt",
+  "language": "Ngôn Ngữ",
+  "languageDescription": "Lựa chọn ngôn ngữ CodePaper sẽ hiển thị",
+  "countries": {
+    "en": "Tiếng Anh",
+    "vi": "Tiếng Việt"
+  },
+  "genders": {
+    "female": "Nữ",
+    "male": "Nam",
+    "other": "Khác"
+  },
+  "notification": "Thông Báo",
+  "notificationDescription": "Thiết lập thông báo cho CodePaper"
+}

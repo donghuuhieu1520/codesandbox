@@ -1,0 +1,34 @@
+{
+  "newfeeds": "Newfeeds",
+  "populars": "Populars",
+  "archived": "Archived",
+  "settings": "Settings",
+  "new": "New",
+  "myProfile": "My profile",
+  "signOut": "Sign out",
+  "account": "Account",
+  "accountDescription": "Change your profile",
+  "name": "Name",
+  "email": "Email",
+  "gender": "Gender",
+  "birthday": "Birthday",
+  "apply": "Apply",
+  "appearance": "Appearance",
+  "appearanceDescription": "Set up how CodePaper displayed",
+  "darkMode": "Dark mode",
+  "on": "On",
+  "off": "Off",
+  "language": "Language",
+  "languageDescription": "Choose language CodePaper displayed",
+  "countries": {
+    "en": "English",
+    "vi": "Vietnamese"
+  },
+  "genders": {
+    "female": "Female",
+    "male": "Male",
+    "other": "Other"
+  },
+  "notification": "Notification",
+  "notificationDescription": "Set up the way how CodePaper send you notification"
+}

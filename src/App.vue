@@ -11,7 +11,7 @@ export default {
     this.$Progress.finish()
   },
   created () {
-    this.$vuetify.theme.dark = true
+    this.$vuetify.theme.dark = this.$store.state.preferences.darkMode
     this.$Progress.start()
     this.$router.beforeEach((to, from, next) => {
       if (to.meta.progress !== undefined) {
