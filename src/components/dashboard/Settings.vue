@@ -16,6 +16,7 @@
                 </v-list-item-icon>
                 <v-list-item-content>
                   <v-list-item-title v-text="item.text"></v-list-item-title>
+                  <v-list-item-subtitle v-text="item.description"></v-list-item-subtitle>
                 </v-list-item-content>
               </v-list-item>
             </v-list-item-group>
@@ -24,12 +25,10 @@
       </v-col>
       <v-col cols="8">
         <v-card>
-          <v-list-item two-line>
-            <v-list-item-content>
-              <v-list-item-title class="headline">{{ items[currentTabIndex].text }}</v-list-item-title>
-              <v-list-item-subtitle>{{ items[currentTabIndex].description }}</v-list-item-subtitle>
-            </v-list-item-content>
-          </v-list-item>
+          <v-toolbar flat>
+            <v-app-bar-nav-icon></v-app-bar-nav-icon>
+            <v-toolbar-title class="headline">{{ items[currentTabIndex].text }}</v-toolbar-title>
+          </v-toolbar>
           <v-divider></v-divider>
           <v-list-item-group v-show="currentTabIndex===0" class="px-4">
             <v-list-item>
@@ -118,6 +117,9 @@
   </v-container>
 </template>
 <script>
+import i18n from '@/plugins/i18n'
+const lang = i18n.t.bind(i18n)
+
 export default {
   data () {
     return {
@@ -126,33 +128,33 @@ export default {
       },
       languages: [
         {
-          text: this.$t('dashboard.countries.en'),
+          text: lang('dashboard.countries.en'),
           value: 'en'
         },
         {
-          text: this.$t('dashboard.countries.vi'),
+          text: lang('dashboard.countries.vi'),
           value: 'vi'
         }
       ],
       genders: [
         {
-          text: this.$t('dashboard.genders.female'),
+          text: lang('dashboard.genders.female'),
           value: 'female'
         },
         {
-          text: this.$t('dashboard.genders.male'),
+          text: lang('dashboard.genders.male'),
           value: 'male'
         },
         {
-          text: this.$t('dashboard.genders.other'),
+          text: lang('dashboard.genders.other'),
           value: 'other'
         }
       ],
       items: [
-        { text: this.$t('dashboard.account'), icon: 'mdi-account', description: this.$t('dashboard.accountDescription') },
-        { text: this.$t('dashboard.appearance'), icon: 'mdi-emoticon', description: this.$t('dashboard.appearanceDescription') },
-        { text: this.$t('dashboard.language'), icon: 'mdi-translate', description: this.$t('dashboard.languageDescription') },
-        { text: this.$t('dashboard.notification'), icon: 'mdi-bell', description: this.$t('dashboard.notificationDescription') }
+        { text: lang('dashboard.account'), icon: 'mdi-account', description: lang('dashboard.accountDescription') },
+        { text: lang('dashboard.appearance'), icon: 'mdi-emoticon', description: lang('dashboard.appearanceDescription') },
+        { text: lang('dashboard.language'), icon: 'mdi-translate', description: lang('dashboard.languageDescription') },
+        { text: lang('dashboard.notification'), icon: 'mdi-bell', description: lang('dashboard.notificationDescription') }
       ],
       currentTabIndex: 0,
       darkMode: this.$store.state.preferences.darkMode
@@ -172,11 +174,11 @@ export default {
     }
   },
   metaInfo: {
-    title: 'Settings'
+    title: lang('dashboard.settings')
   },
   computed: {
     nextDarkModeSwitchLabel () {
-      return this.darkMode ? this.$t('dashboard.off') : this.$t('dashboard.on')
+      return this.darkMode ? lang('dashboard.off') : lang('dashboard.on')
     }
   }
 }
