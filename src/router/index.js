@@ -1,31 +1,29 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import VueMeta from 'vue-meta'
-import Home from '../views/Home.vue'
+import routes from '@/router/paths'
+import store from '@/store'
 
 Vue.use(VueRouter)
 Vue.use(VueMeta)
 
-const routes = [
-  {
-    path: '/',
-    name: 'Newfeeds',
-    component: Home
-  },
-  {
-    path: '/settings',
-    name: 'Settings',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/Settings.vue')
-  }
-]
-
 const router = new VueRouter({
   mode: 'history',
   base: process.env.BASE_URL,
-  routes
+  routes,
+  scrollBehavior (to, from, savedPos) {
+    if (savedPos) return savedPos
+    if (to.hash) return { selector: to.hash }
+    return { x: 0, y: 0 }
+  }
+})
+
+router.beforeEach((to, from, next) => {
+  if (to.matched.some(record => record.meta.requiresAuth)) {
+    if (store.getters.authorized) return next()
+    return next('/login')
+  }
+  return next()
 })
 
 export default router
