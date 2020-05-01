@@ -1,0 +1,5 @@
+{
+  "required": "This field is required",
+  "minChar": "Min characters",
+  "notEmail": "Please enter your email"
+}

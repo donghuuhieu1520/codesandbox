@@ -21,6 +21,14 @@ export default new Vuex.Store({
     CHANGE_DARKMODE: ({ preferences }, value) => { preferences.darkMode = !!value },
     CHANGE_LANG: ({ preferences }, lang) => { preferences.lang = lang }
   },
+  getters: {
+    language ({ preferences }) {
+      return preferences.lang
+    },
+    isDarkMode ({ preferences }) {
+      return preferences.darkMode
+    }
+  },
   actions: {
   },
   modules: {

@@ -1,0 +1,5 @@
+{
+  "required": "Trường bắt buộc",
+  "minChar": "Độ dài tối thiểu",
+  "notEmail": "Vui lòng điền emai"
+}

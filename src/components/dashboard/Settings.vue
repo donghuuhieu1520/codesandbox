@@ -3,8 +3,9 @@
     <v-row>
       <v-col cols="4">
         <v-card>
-          <v-list rounded>
+          <v-list>
             <v-subheader>{{ $t('dashboard.settings') }}</v-subheader>
+            <v-divider/>
             <v-list-item-group v-model="currentTabIndex" color="primary">
               <v-list-item
                 v-for="(item, i) in items"
@@ -44,6 +45,31 @@
               <v-list-item-subtitle class="text-right">
                 <v-text-field
                   value="donghuuhieu1520@gmail.com"
+                ></v-text-field>
+              </v-list-item-subtitle>
+            </v-list-item>
+            <v-list-item>
+              <v-list-item-title>{{ $t('dashboard.password') }}</v-list-item-title>
+              <v-list-item-subtitle class="text-right">
+                <v-text-field
+                  v-model="newPassword"
+                  :append-icon="showNewPassword ? 'mdi-eye' : 'mdi-eye-off'"
+                  :type="showNewPassword ? 'text' : 'password'"
+                  @click:append="showNewPassword = !showNewPassword"
+                  :placeholder="$t('dashboard.passwordPlaceholder')"
+                ></v-text-field>
+              </v-list-item-subtitle>
+            </v-list-item>
+            <v-list-item v-show="newPassword.length !== 0">
+              <v-list-item-title>{{ $t('dashboard.rePassword') }}</v-list-item-title>
+              <v-list-item-subtitle class="text-right">
+                <v-text-field
+                  v-model="reNewPassword"
+                  :append-icon="showReNewPassword ? 'mdi-eye' : 'mdi-eye-off'"
+                  :type="showReNewPassword ? 'text' : 'password'"
+                  @click:append="showReNewPassword = !showReNewPassword"
+                  :error="reNewPassword !== newPassword"
+                  :placeholder="$t('dashboard.rePasswordPlaceholder')"
                 ></v-text-field>
               </v-list-item-subtitle>
             </v-list-item>
@@ -117,12 +143,15 @@
   </v-container>
 </template>
 <script>
-import i18n from '@/plugins/i18n'
-const lang = i18n.t.bind(i18n)
+import lang from '@/util/lang'
 
 export default {
   data () {
     return {
+      newPassword: '',
+      reNewPassword: '',
+      showNewPassword: false,
+      showReNewPassword: false,
       languageSelected: {
         value: this.$store.state.preferences.lang
       },

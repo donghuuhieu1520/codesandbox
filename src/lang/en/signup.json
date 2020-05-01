@@ -1,0 +1,12 @@
+{
+  "title": "Sign up",
+  "subtitle": "to continue to CodePaper",
+  "signup": "Create",
+  "login": "Sign in",
+  "account": "Email",
+  "password": "Password",
+  "rePassword": "Confirm password",
+  "firstName": "First name",
+  "lastName": "Last name",
+  "fullName": "Full name"
+}

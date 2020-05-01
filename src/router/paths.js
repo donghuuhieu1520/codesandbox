@@ -26,11 +26,20 @@ export default [
     ]
   },
   {
-    path: '/login',
+    path: '/signin',
+    name: 'signin',
     meta: {
       requiresAuth: false
     },
     component: () => import('@/views/Login.vue')
+  },
+  {
+    path: '/signup',
+    name: 'signup',
+    meta: {
+      requiresAuth: false
+    },
+    component: () => import('@/views/Signup.vue')
   },
   {
     path: '*',

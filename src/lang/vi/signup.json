@@ -1,0 +1,12 @@
+{
+  "title": "Tạo tài khoản",
+  "subtitle": "để tham gia CodePaper",
+  "signup": "Tạo",
+  "login": "Đăng nhập",
+  "account": "Email",
+  "password": "Mật khẩu",
+  "rePassword": "Xác nhận mật khẩu",
+  "firstName": "Họ",
+  "lastName": "Tên",
+  "fullName": "Tên đầy đủ"
+}
