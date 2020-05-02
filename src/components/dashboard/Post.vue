@@ -6,8 +6,8 @@
           class="elevation-6"
           :src="avatar"
         ></v-img>
-        <v-avatar :color="getAvatarColor" size="48" v-else>
-          <span class="white--text headline">{{ abbrName }}</span>
+        <v-avatar :color="getAvatarColor()" size="48" v-else>
+          <span class="white--text subtitle-1">{{ abbrName }}</span>
         </v-avatar>
       </v-list-item-avatar>
       <v-list-item-content>
@@ -30,13 +30,19 @@
         <v-row
           align="center"
           justify="start">
-          <v-icon class="mr-1">mdi-thumb-up</v-icon>
+          <v-btn icon>
+            <v-icon class="mr-1">mdi-thumb-up</v-icon>
+          </v-btn>
           <span class="subheading mr-2">{{ upvote }}</span>
           <span class="mr-1">·</span>
-          <v-icon class="mr-1">mdi-thumb-down</v-icon>
+          <v-btn icon>
+            <v-icon class="mr-1">mdi-thumb-down</v-icon>
+          </v-btn>
           <span class="subheading mr-2">{{ downvote }}</span>
           <span class="mr-1">·</span>
-          <v-icon class="mr-1">mdi-chat-processing</v-icon>
+          <v-btn icon>
+            <v-icon class="mr-1">mdi-chat-processing</v-icon>
+          </v-btn>
           <span class="subheading">{{ commentsNumber }}</span>
         </v-row>
       </v-list-item>
@@ -47,9 +53,15 @@
 <script>
 import moment from '@/util/moment'
 
-// const colors = ['purple', 'teal', 'blue', 'red', 'pink', 'yellow', 'indigo', 'cyan', 'green']
+const colors = ['purple', 'teal', 'blue', 'red', 'pink', 'yellow', 'indigo', 'cyan', 'green']
 
 export default {
+  data () {
+    return {
+      abbrName: '',
+      postSince: ''
+    }
+  },
   props: {
     author: {
       type: String,
@@ -80,23 +92,29 @@ export default {
       required: true
     }
   },
-  computed: {
-    postSince () {
-      return moment().from(this.date)
-    },
-    abbrName () {
-      const name = this.author.split(/[ ,]+/)
-      if (name.length === 1) return name[0][0] + name[0][1]
-      return name[0][0] + name[name.length - 1][0]
-    }
+  created () {
+    this.abbrName = this.getAbbrNames().join('')
+    this.postSince = this.getPostSince()
   },
   methods: {
     getAvatarColor () {
-      return 'red'
+      const sum = this.getAbbrNames().reduce((sum, char) => {
+        sum += char.charCodeAt(0)
+        return sum
+      }, 0)
+      return colors[sum % colors.length]
+    },
+    getAbbrNames () {
+      const abbr = []
+      const words = this.author.split(/[ ,]+/)
+      words.forEach((word, i) => {
+        if (i < 2) abbr.push(word[0])
+      })
+      return abbr
+    },
+    getPostSince () {
+      return moment().from(this.date)
     }
   }
 }
 </script>
-
-<style type="scss" scoped>
-</style>

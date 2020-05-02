@@ -11,17 +11,22 @@ export default [
     children: [
       {
         path: '',
-        component: () => import('@/components/dashboard/Newfeeds.vue')
+        component: () => import('@/views/dashboard/Newfeeds.vue')
       },
       {
         path: 'newfeeds',
         name: 'newfeeds',
-        component: () => import('@/components/dashboard/Newfeeds.vue')
+        component: () => import('@/views/dashboard/Newfeeds.vue')
       },
       {
         path: 'settings',
         name: 'settings',
-        component: () => import('@/components/dashboard/Settings.vue')
+        component: () => import('@/views/dashboard/Settings.vue')
+      },
+      {
+        path: 'post/:postId',
+        name: 'post',
+        component: () => import('@/views/dashboard/PostDetail.vue')
       }
     ]
   },

@@ -1,7 +1,7 @@
 <template>
   <v-container>
     <v-row>
-      <v-col cols="8">
+      <v-col xs="12" sm="12" md="8">
         <Post v-for="post in posts"
           class="mb-5"
           :author="post.author"
@@ -13,7 +13,7 @@
           :commentsNumber="post.commentsNumber"
           :date="post.date"/>
       </v-col>
-      <v-col cols="4">
+      <v-col xs="12" sm="12" md="4">
         <PostFilter/>
       </v-col>
     </v-row>

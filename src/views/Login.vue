@@ -46,7 +46,7 @@
                     <v-row cols="12" class="mt-5">
                       <v-col cols="6">
                         <router-link :to="{ name: 'signup' }" v-slot="{ href }">
-                          <v-btn :href="href" text color="primary">{{ $t('login.create') }}</v-btn>
+                          <v-btn :to="href" text color="primary">{{ $t('login.create') }}</v-btn>
                         </router-link>
                       </v-col>
                       <v-col cols="6" class="text-right">
@@ -63,11 +63,22 @@
                 </transition>
                 <transition
                   name="in"
-                  enter-active-class="animated fadeInRight"
-                  leave-active-class="animated fadeOutRight">
+                  enter-active-class="animated fadeInRight faster">
                   <v-form
                     class="px-3"
                     v-if="loginState === 'password'">
+                    <v-row>
+                      <v-col class="text-center">
+                        <v-chip
+                          @click="loginState = 'email'"
+                          class="pointer">
+                          <v-avatar left>
+                            <v-icon>mdi-account-circle</v-icon>
+                          </v-avatar>
+                          {{ email }}
+                        </v-chip>
+                      </v-col>
+                    </v-row>
                     <v-text-field
                       id="password"
                       :label="$t('login.password')"

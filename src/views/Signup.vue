@@ -88,7 +88,7 @@
                       <v-row cols="12" class="mt-5">
                         <v-col cols="6">
                           <router-link :to="{ name: 'signin' }" v-slot="{ href }">
-                            <v-btn :href="href" text color="primary">{{ $t('signup.login') }}</v-btn>
+                            <v-btn :to="href" text color="primary">{{ $t('signup.login') }}</v-btn>
                           </router-link>
                         </v-col>
                         <v-col cols="6" class="text-right">
