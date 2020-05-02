@@ -81,10 +81,10 @@
         <template v-slot:activator="{ on }">
           <v-avatar
             color="red"
-            size="48"
+            size="32"
             v-on="on"
             pointer>
-            <a class="white--text headline pointer">HD</a>
+            <a class="white--text pointer">HD</a>
           </v-avatar>
         </template>
         <v-list>
@@ -92,12 +92,19 @@
             link
             v-for="(item, index) in userItems"
             :key="index"
-            :to="{ name: item.pathName, hash: item.hash }"
-          >
+            :to="{ name: item.pathName, hash: item.hash }">
             <v-list-item-action>
               <v-icon>{{ item.icon }}</v-icon>
             </v-list-item-action>
             <v-list-item-title>{{ item.title }}</v-list-item-title>
+          </v-list-item>
+          <v-list-item
+            link
+            @click="doLogOut">
+            <v-list-item-action>
+              <v-icon>mdi-logout</v-icon>
+            </v-list-item-action>
+            <v-list-item-title>{{ $t('dashboard.signOut') }}</v-list-item-title>
           </v-list-item>
         </v-list>
       </v-menu>
@@ -159,10 +166,15 @@ export default {
         }
       ],
       userItems: [
-        { title: this.$t('dashboard.myProfile'), pathName: 'settings', icon: 'mdi-account', hash: '#account' },
-        { title: this.$t('dashboard.signOut'), pathName: 'signout', icon: 'mdi-logout' }
+        { title: this.$t('dashboard.myProfile'), pathName: 'settings', icon: 'mdi-account', hash: '#account' }
       ],
       drawer: null
+    }
+  },
+  methods: {
+    doLogOut () {
+      this.$store.commit('DO_LOGOUT')
+      this.$router.push({ name: 'signin' })
     }
   }
 }

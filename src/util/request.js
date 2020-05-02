@@ -7,7 +7,7 @@ const axiosInstance = axios.create({
 })
 
 instance.interceptors.request.use(opts => {
-  if (store.getters.token)
+  if (store.getters.hasToken)
     opts.headers['Authorization'] = `Bearer ${store.getters.token}`
   return opts
 }, err => {

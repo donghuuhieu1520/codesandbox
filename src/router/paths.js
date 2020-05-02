@@ -1,12 +1,27 @@
 import Dashboard from '@/views/dashboard/Dashboard.vue'
+import store from '@/store'
+
+const ifNotAuthenticated = (to, from, next) => {
+  if (store.getters.hasToken) {
+    return next({ name: 'newfeeds' })
+  }
+  return next()
+}
+
+// const ifAuthenticated = (to, from, next) => {
+//   if (store.getters.hasToken) {
+//     return next()
+//   }
+//   return next({ name: 'signin' })
+// }
 
 export default [
   {
     path: '/dashboard',
     component: Dashboard,
+    name: 'dashboard',
     meta: {
-      name: 'dashboard',
-      requiresAuth: false
+      requiresAuth: true
     },
     children: [
       {
@@ -33,6 +48,7 @@ export default [
   {
     path: '/signin',
     name: 'signin',
+    beforeEnter: ifNotAuthenticated,
     meta: {
       requiresAuth: false
     },
@@ -41,6 +57,7 @@ export default [
   {
     path: '/signup',
     name: 'signup',
+    beforeEnter: ifNotAuthenticated,
     meta: {
       requiresAuth: false
     },
