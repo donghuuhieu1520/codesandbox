@@ -22,7 +22,7 @@
                 <v-app-bar-nav-icon></v-app-bar-nav-icon>
                 <v-toolbar-title>{{ $store.state.appName }}</v-toolbar-title>
               </v-toolbar>
-              <v-card-text class="text-center">
+              <v-card-text class="text-center" v-show="loginState === 'email'">
                 <p class="headline mb-0 font-weight-medium">{{ $t('login.title') }}</p>
                 <p class="mt-0 subtitle-1">{{ $t('login.subtitle') }}</p>
               </v-card-text>
@@ -69,6 +69,7 @@
                     v-if="loginState === 'password'">
                     <v-row>
                       <v-col class="text-center">
+                        <p class="title">{{ $t('login.welcome')}}</p>
                         <v-chip
                           @click="loginState = 'email'"
                           class="pointer">
@@ -79,18 +80,22 @@
                         </v-chip>
                       </v-col>
                     </v-row>
-                    <v-text-field
-                      id="password"
-                      :label="$t('login.password')"
-                      v-model="password"
-                      name="password"
-                      outlined
-                      :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
-                      :type="showPassword ? 'text' : 'password'"
-                      :rules="[rules.required]"
-                      @keydown.enter.prevent="doLogin"
-                      @click:append="showPassword = !showPassword"/>
-                    <v-row cols="12" class="mt-5">
+                    <v-row>
+                      <v-col>
+                        <v-text-field
+                          id="password"
+                          :label="$t('login.password')"
+                          v-model="password"
+                          name="password"
+                          outlined
+                          :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
+                          :type="showPassword ? 'text' : 'password'"
+                          :rules="[rules.required]"
+                          @keydown.enter.prevent="doLogin"
+                          @click:append="showPassword = !showPassword"/>
+                      </v-col>
+                    </v-row>
+                    <v-row cols="12">
                       <v-col cols="6">
                         <v-btn text color="primary">{{ $t('login.forgot') }}</v-btn>
                       </v-col>

@@ -4,10 +4,21 @@ const messages = {}
 
 for (const file of requireLang.keys()) {
   if (file === './index.js') continue
-  const path = file.replace(/(\.\/|\.json$)/g, '').split('/')
-  path.reduce((o, s, i) => {
+  const paths = file.replace(/(\.\/|\.json$)/g, '').split('/')
+  paths.reduce((o, s, i) => {
     if (o[s]) return o[s]
-    o[s] = i + 1 === path.length ? requireLang(file) : {}
+    if (i + 1 === paths.length) {
+      if (paths[i] === 'index') {
+        const indexContent = requireLang(file)
+        Object.keys(indexContent).forEach(key => {
+          o[key] = indexContent[key]
+        })
+        return o
+      }
+      o[s] = requireLang(file)
+      return o[s]
+    }
+    o[s] = {}
     return o[s]
   }, messages)
 }

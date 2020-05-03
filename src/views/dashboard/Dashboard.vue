@@ -27,8 +27,21 @@
       clipped-left
     >
       <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
-      <v-toolbar-title>{{ $store.state.appName }}</v-toolbar-title>
-      <v-spacer></v-spacer>
+      <img src="@/assets/logo64.png" alt="" height="32" draggable="false">
+      <v-toolbar-title>
+        {{ $store.state.appName }}
+      </v-toolbar-title>
+      <v-spacer />
+      <v-text-field
+        outlined
+        dense
+        hide-details
+        label=""
+        :placeholder="$t('common.search')"
+        prepend-inner-icon="mdi-magnify"
+      />
+
+      <v-spacer />
       <v-btn color="primary">
        <v-icon dark left>mdi-plus</v-icon>{{ $t('dashboard.new') }}
       </v-btn>

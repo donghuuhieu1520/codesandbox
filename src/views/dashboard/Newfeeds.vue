@@ -13,16 +13,12 @@
           :commentsNumber="post.commentsNumber"
           :date="post.date"/>
       </v-col>
-      <v-col xs="12" sm="12" md="4">
-        <PostFilter/>
-      </v-col>
     </v-row>
   </v-container>
 </template>
 
 <script>
 import Post from '@/components/dashboard/Post.vue'
-import PostFilter from '@/components/dashboard/PostFilter.vue'
 import lang from '@/util/lang'
 
 export default {
@@ -34,8 +30,7 @@ export default {
     ]
   }),
   components: {
-    Post,
-    PostFilter
+    Post
   },
   metaInfo: {
     title: lang('dashboard.newfeeds')
