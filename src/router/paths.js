@@ -1,7 +1,7 @@
 import Dashboard from '@/views/dashboard/Dashboard.vue'
 import store from '@/store'
 
-const ifNotAuthenticated = (to, from, next) => {
+const checkNotAuthenticated = (to, from, next) => {
   if (store.getters.hasToken) {
     return next({ name: 'newfeeds' })
   }
@@ -48,7 +48,7 @@ export default [
   {
     path: '/signin',
     name: 'signin',
-    beforeEnter: ifNotAuthenticated,
+    beforeEnter: checkNotAuthenticated,
     meta: {
       requiresAuth: false
     },
@@ -57,7 +57,7 @@ export default [
   {
     path: '/signup',
     name: 'signup',
-    beforeEnter: ifNotAuthenticated,
+    beforeEnter: checkNotAuthenticated,
     meta: {
       requiresAuth: false
     },

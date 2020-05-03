@@ -44,16 +44,26 @@
                     <v-col cols="12" xs="6" md="6">
                         <v-select
                           :items="post.allowedLanguages"
+                          v-model="languageSelected"
+                          return-object
                           label="Select language"
                           dense
-                          outlined
-                        ></v-select>
+                          outlined>
+                          <template slot="item" slot-scope="lang">
+                            <v-list-tile-avatar left>
+                              <v-icon>{{ lang.item.icon }}</v-icon>
+                            </v-list-tile-avatar>
+                            <v-list-tile-content>
+                              <span class="ml-2">{{ lang.item.text }}</span>
+                            </v-list-tile-content>
+                          </template>
+                        </v-select>
                     </v-col>
                   </v-row>
                 </v-card-text>
                 <prism-editor
+                  :language="languageSelected.value"
                   :code="code.content"
-                  :language="code.language"
                   :lineNumbers="true">
                 </prism-editor>
                 <v-card-actions>
@@ -92,33 +102,17 @@ export default {
       downvote: 29,
       commentsNumber: 15,
       date: new Date(2020, 4, 30, 20, 14, 25, 40),
-      allowedLanguages: ['js', 'python']
+      allowedLanguages: [
+        { text: 'javascript', value: 'js', icon: 'mdi-language-javascript' },
+        { text: 'CSharp', value: 'cs', icon: 'mdi-language-csharp' }
+      ]
     },
+    languageSelected: { value: 'js' },
     code: {
-      language: 'js',
-      content: `export default {
-  data: () => ({
-    post: {
-      id: 1,
-      author: 'Monkey D. Luffy',
-      avatar: '',
-      content: 'Lorem ipsum dolor sit amet',
-      upvote: 10,
-      downvote: 29,
-      commentsNumber: 15,
-      date: new Date(2020, 4, 30, 20, 14, 25, 40)
-    },
-    code: 'test'
-  }),
-  components: {
-    Post,
-    PrismEditor
-  },
-  metaInfo: {
-    title: lang('dashboard.newfeeds')
-  }
-}
-        `
+      content: `
+const exp = "Hello world";
+alert(exp)
+      `
     }
   }),
   components: {
