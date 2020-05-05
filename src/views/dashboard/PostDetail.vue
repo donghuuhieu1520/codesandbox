@@ -10,17 +10,14 @@
           :upvote="post.upvote"
           :downvote="post.downvote"
           :commentsNumber="post.commentsNumber"
-          :date="post.date"/>
+          :date="post.date"
+        />
       </v-col>
     </v-row>
     <v-row>
       <v-col xs="12" sm="12" md="8">
         <v-card>
-          <v-tabs
-            v-model="tab"
-            color="primary"
-            icons-and-text
-          >
+          <v-tabs v-model="tab" color="primary" icons-and-text>
             <v-tabs-slider></v-tabs-slider>
             <v-tab href="#tab-1">
               {{ $t('postdetail.playGround') }}
@@ -33,44 +30,40 @@
             </v-tab>
           </v-tabs>
           <v-tabs-items v-model="tab">
-            <v-tab-item
-              v-for="i in 3"
-              :key="i"
-              :value="'tab-' + i"
-            >
+            <v-tab-item v-for="i in 3" :key="i" :value="'tab-' + i">
               <v-card flat>
                 <v-card-text>
                   <v-row>
                     <v-col cols="12" xs="6" md="6">
-                        <v-select
-                          :items="post.allowedLanguages"
-                          v-model="languageSelected"
-                          return-object
-                          label="Select language"
-                          dense
-                          outlined>
-                          <template slot="item" slot-scope="lang">
-                            <v-list-tile-avatar left>
-                              <v-icon>{{ lang.item.icon }}</v-icon>
-                            </v-list-tile-avatar>
-                            <v-list-tile-content>
-                              <span class="ml-2">{{ lang.item.text }}</span>
-                            </v-list-tile-content>
-                          </template>
-                        </v-select>
+                      <v-select
+                        :items="post.allowedLanguages"
+                        v-model="languageSelected"
+                        return-object
+                        label="Select language"
+                        dense
+                        outlined
+                      >
+                        <template slot="item" slot-scope="lang">
+                          <v-list-tile-avatar left>
+                            <v-icon>{{ lang.item.icon }}</v-icon>
+                          </v-list-tile-avatar>
+                          <v-list-tile-content>
+                            <span class="ml-2">{{ lang.item.text }}</span>
+                          </v-list-tile-content>
+                        </template>
+                      </v-select>
                     </v-col>
                   </v-row>
                 </v-card-text>
-                <prism-editor
+                <!-- <prism-editor
                   :language="languageSelected.value"
                   :code="code.content"
                   :lineNumbers="true">
-                </prism-editor>
+                </prism-editor>-->
+                <codemirror v-model="code.content" :options="code.options" />
                 <v-card-actions>
                   <v-spacer></v-spacer>
-                  <v-btn color="primary">
-                    Submit
-                  </v-btn>
+                  <v-btn color="primary">Submit</v-btn>
                 </v-card-actions>
               </v-card>
             </v-tab-item>
@@ -83,11 +76,12 @@
 
 <script>
 import Post from '@/components/dashboard/Post.vue'
-import PrismEditor from 'vue-prism-editor'
 import lang from '@/util/lang'
-import 'vue-prism-editor/dist/VuePrismEditor.css'
-import 'prismjs'
-import 'prismjs/themes/prism-okaidia.css'
+import { codemirror } from 'vue-codemirror'
+
+import 'codemirror/lib/codemirror.css'
+import 'codemirror/mode/go/go'
+import 'codemirror/theme/monokai.css'
 
 export default {
   data: () => ({
@@ -97,27 +91,42 @@ export default {
       id: 1,
       author: 'Monkey D. Luffy',
       avatar: '',
-      content: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vitae consequatur et, iste cumque. Quis consectetur animi qui, blanditiis in, et laborum dolorem aliquid expedita hic eius, enim obcaecati ducimus molestias!',
+      content:
+        'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vitae consequatur et, iste cumque. Quis consectetur animi qui, blanditiis in, et laborum dolorem aliquid expedita hic eius, enim obcaecati ducimus molestias!',
       upvote: 10,
       downvote: 29,
       commentsNumber: 15,
       date: new Date(2020, 4, 30, 20, 14, 25, 40),
       allowedLanguages: [
-        { text: 'javascript', value: 'js', icon: 'mdi-language-javascript' },
-        { text: 'CSharp', value: 'cs', icon: 'mdi-language-csharp' }
+        { text: 'Javascript', value: 'javascript', icon: 'mdi-language-javascript' },
+        { text: 'CSharp', value: 'csharp', icon: 'mdi-language-csharp' },
+        { text: 'Golang', value: 'golang', icon: 'mdi-language-go' }
       ]
     },
     languageSelected: { value: 'js' },
     code: {
-      content: `
-const exp = "Hello world";
-alert(exp)
-      `
+      content: `const fs = require('fs');
+      `,
+      options: {
+        tabSize: 4,
+        styleActiveLine: true,
+        lineNumbers: true,
+        line: true,
+        foldGutter: true,
+        mode: 'text/x-go',
+        matchBrackets: true,
+        showCursorWhenSelecting: true,
+        theme: 'monokai',
+        extraKeys: { Ctrl: 'autocomplete' },
+        hintOptions: {
+          completeSingle: false
+        }
+      }
     }
   }),
   components: {
     Post,
-    PrismEditor
+    codemirror
   },
   metaInfo: {
     title: lang('dashboard.newfeeds')

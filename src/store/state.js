@@ -6,5 +6,6 @@ export default {
   preferences: {
     darkMode: true,
     lang: 'en'
-  }
+  },
+  supportedLanguages: ['javascript', 'csharp', 'golang']
 }
